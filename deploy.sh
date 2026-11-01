@@ -11,6 +11,8 @@ echo "beginning the deployment process !"
 
 stowcmd --no-folding pi
 echo
+stowcmd --no-folding codex
+echo
 stowcmd scripts
 echo
 stowcmd zsh

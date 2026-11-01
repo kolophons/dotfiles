@@ -51,3 +51,10 @@ fonts/IosevkaCustom
 !/pi/.pi/agent/
 /pi/.pi/agent/*
 !/pi/.pi/agent/settings.json
+
+# Codex: share only the base config and custom agents; keep runtime state local.
+/codex/.codex/*
+!/codex/.codex/config.toml
+!/codex/.codex/agents/
+/codex/.codex/agents/*
+!/codex/.codex/agents/*.toml

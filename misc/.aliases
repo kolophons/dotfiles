@@ -7,7 +7,6 @@ alias feh_browse='feh -g 640x480 -d -S filename'
 alias bfg='java -jar ~/.local/bin/bfg.jar'
 
 alias datestamp='date +%y-%m-%d'
-alias ls='/usr/bin/ls --color=auto'
 alias latr='ls -latr'
 alias gits='git status'
 alias gita='gits ; git add'

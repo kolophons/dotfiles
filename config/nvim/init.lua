@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Small, native-LSP setup for Neovim 0.12+. See README.md for usage.
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
+vim.keymap.set("t", ";;", "<c-\\><c-n>")
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
