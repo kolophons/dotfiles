@@ -141,7 +141,12 @@ bindsym $mod+z focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+F12 move scratchpad
-bindsym F10 [title="^Hyper Journal"] scratchpad show, resize set 656 px 800 px 
+# Whisp: F10 launches it if absent, otherwise toggles its scratchpad window.
+for_window [class="^whisp$" title="^Whisp$"] floating enable, move scratchpad, resize set 512 px 384 px, scratchpad show
+bindsym F10 exec --no-startup-id bash ~/projects/whisp/scripts/toggle-i3.sh
+# Speech Note remains available on Shift+F10.
+for_window [class="^dsnote$" title="^Speech Note$"] floating enable, move scratchpad, resize set 512 px 384 px, scratchpad show
+bindsym Shift+F10 exec --no-startup-id bash ~/.config/i3/scratch-speechnote.sh
 # Toggle the journal and all cards together, restoring each window's size.
 bindsym F11 exec --no-startup-id bash ~/.config/i3/scratch-hyper.sh
 for_window [title="^Hyper \w\d\w"] floating enable, move scratchpad, scratchpad show, resize set 532 px 260 px
@@ -153,7 +158,6 @@ bindsym $mod+Control+minus move scratchpad
 
 # Dedicated utility terminal: F12 creates it if absent, otherwise toggles it.
 # Match WM_CLASS so the shell can continue changing the window title.
-exec --no-startup-id ghostty --class scratch.terminal --gtk-single-instance=true
 for_window [class="^scratch.terminal$"] floating enable, move scratchpad, resize set 1024 px 768 px, scratchpad show
 bindsym F12 exec --no-startup-id bash ~/.config/i3/scratch-terminal.sh
 
