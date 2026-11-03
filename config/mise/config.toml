@@ -1,0 +1,4 @@
+[settings]
+# Keep shell startup independent of network availability.
+# Allow network for one command with: MISE_OFFLINE=false mise install
+offline = true
