@@ -4,7 +4,6 @@ SHELLRC="$HOME/.zshrc"
 BROWSER="firefox"
 
 alias feh_browse='feh -g 640x480 -d -S filename'
-alias bfg='java -jar ~/.local/bin/bfg.jar'
 
 alias datestamp='date +%y-%m-%d'
 alias latr='ls -latr'

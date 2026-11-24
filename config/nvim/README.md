@@ -23,6 +23,8 @@ Language support needs additional tools:
 | --- | --- | --- |
 | Rust | `cargo`, `rustc`, `rustfmt`, and matching standard-library sources (`rust-src`) | `rust-analyzer` |
 | TypeScript / JavaScript | Node.js and npm; the currently installed typescript-language-server 6.0.0 requires Node >=22.22.2 | `typescript-language-server` |
+| YAML / GitLab CI | Node.js and npm | `yaml-language-server` |
+| Terraform | Terraform CLI for formatting and schemas from locally installed providers | `terraform-ls` |
 
 `rustfmt` provides formatting; `rust-src` provides standard-library navigation.
 With rustup, install those components using `rustup component add rustfmt rust-src`.
@@ -50,7 +52,7 @@ Network access is needed for those initial downloads and subsequent updates.
 4. Install the language servers you use:
 
    ```vim
-   :MasonInstall rust-analyzer typescript-language-server
+   :MasonInstall rust-analyzer typescript-language-server yaml-language-server terraform-ls
    ```
 
 5. Restart Neovim, then open a file in a Rust or TypeScript/JavaScript project.
@@ -62,9 +64,28 @@ directory to Neovim's PATH. Its TypeScript server package also installs
 TypeScript. An existing server on PATH can be used instead of installing it
 through Mason; Mason's copy takes precedence when present.
 
-Both servers are enabled in `lua/plugins/lsp.lua`. To add a server, install its
-executable and add its nvim-lspconfig name to `vim.lsp.enable()` there. The two
-configured names are `rust_analyzer` and `ts_ls`.
+Servers are enabled in `lua/plugins/lsp.lua`. To add a server, install its
+executable and add its nvim-lspconfig name to `vim.lsp.enable()` there.
+
+Terraform uses the nvim-lspconfig name `terraformls` (the Mason package and
+executable are named `terraform-ls`). It attaches to `.tf` and `.tfvars` files.
+The server includes schemas for common providers. Install the Terraform CLI
+version required by your project for formatting and schemas that match your
+locally installed provider versions; initialize the appropriate Terraform root
+through your normal workflow.
+
+`yamlls` provides YAML completion, hover documentation, diagnostics, and formatting.
+GitLab's CI schema is explicitly associated with `*.gitlab-ci.yml`,
+`*.gitlab-ci.yaml`, and `.gitlab-ci*.yml` / `.gitlab-ci*.yaml` helper files.
+GitLab's `!reference` sequence tag is accepted. For CI includes with other names,
+add this comment at the top of the file:
+
+```yaml
+# yaml-language-server: $schema=https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json
+```
+
+The schema follows GitLab's development branch. For full pipeline validation,
+including resolving includes, use GitLab's CI Lint.
 
 Use `:Lazy` to manage plugins and `:Lazy restore` to restore locked revisions.
 Use `:Mason` to manage language servers. Srcery is the default theme; Zenburn

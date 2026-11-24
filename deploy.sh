@@ -15,7 +15,8 @@ stowcmd --no-folding codex
 echo
 stowcmd scripts
 echo
-stowcmd zsh
+# Zsh generates this cache locally; keep it out of deployment.
+stowcmd --ignore='^\.zcompdump$' zsh
 echo
 stowcmd misc
 echo
